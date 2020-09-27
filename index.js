@@ -1,6 +1,6 @@
 const express = require('express') // Libreria para configurar servidor
 const app = express() // Variable para usar el modulo de express
-const port = 3000; // Sera dinamico
+const port = process.env.PORT || 3000; // Sera dinamico
 // template Engine (ejs)
 app.set('view engine', 'ejs'); // Usar ejs
 app.use(express.static(__dirname + '/public')) // Crear Middleare, dirname hace alusion a la ruta configurada
