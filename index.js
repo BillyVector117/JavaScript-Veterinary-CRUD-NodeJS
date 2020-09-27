@@ -12,8 +12,8 @@ app.get('/settings', (req, res) => { // Requerir la pagina/ruta settings
   res.render("settings",{Title: 'This is the settings Page using Ejs'}) // Respuesta del server
   })
 app.get('/contact', (req, res) => { // Requerir la pagina/ruta contact
-  res.render('This is the contact Page') // Respuesta del server
-})
+  res.render('This is the contact Page', {Title: 'This is the Contact Page using Ejs'}) // Respuesta del server
+  })
 app.use((req, res, next) => { // Middleware para 404 page
     res.status(404).render("error", { Title: 'THIS ERROR 404 PAGE USING EJS', Descrp: 'Description generated using ejs template engine'}) // Respuesta 404
   })
