@@ -4,13 +4,16 @@
   "description": "practice",
   "main": "index.js",
   "scripts": {
-    "start": "node index"
+    "start": "node index",
+    "dev": "nodemon index"
   },
   "author": "Billy Rodríguez",
   "license": "MIT",
   "dependencies": {
+    "dotenv": "^8.2.0",
     "ejs": "^3.1.5",
     "express": "^4.17.1",
+    "mongoose": "^5.10.7",
     "nodemon": "^2.0.4"
   }
 }

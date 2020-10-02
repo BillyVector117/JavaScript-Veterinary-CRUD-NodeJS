@@ -1,0 +1,29 @@
+<%- include("template/header", { titleWeb: 'Home'})%>
+
+    <div class="container">
+        <table class="table"> <!-- Cremos tabla -->
+            <thead>
+              <tr> <!-- Cabecera de la tabla -->
+                <th scope="col">#</th>
+                <th scope="col">Nombre</th>
+                <th scope="col">Descripción</th>
+                <th scope="col">Acción</th>
+              </tr>
+            </thead>
+            <tbody> <!-- Cuerpo de la tabla -->
+            <!-- Leer todo el listado de mascotas / mas repeticón de tr / Si existe el array en la db realiza el ciclo -->
+            <% if (arrayMascotas.length > 0) { %>
+                <% arrayMascotas.forEach(mascota => { %> <!-- Recorre cada elemento -->
+                    <tr> <!-- Este tr sera nuestro ciclo -->
+                        <th scope="row"><%=mascota.id%></th> <!-- Pintar en texto plano el primer elemento (propiedades estan en al db) -->
+                        <td><%=mascota.nombre%></td>
+                        <td><%=mascota.descripcion%></td>
+                        <td>@mdo</td>
+                      </tr>
+                <% }) %>
+                <% } %>
+            </tbody>
+           
+          </table>
+    </div>
+<%- include("template/footer")%>
