@@ -1,6 +1,8 @@
 <%- include("template/header", { titleWeb: 'Home'})%>
 
     <div class="container">
+      <h1>CRUD MongoDB</h1>
+      <a class="btn btn-success btn-block my-4" href="mascotas/crear"> Crear nueva mascota</a><!-- Botón que dirigé a la pestaña crear mascotas -->
         <table class="table"> <!-- Cremos tabla -->
             <thead>
               <tr> <!-- Cabecera de la tabla -->
@@ -18,12 +20,11 @@
                         <th scope="row"><%=mascota.id%></th> <!-- Pintar en texto plano el primer elemento (propiedades estan en al db) -->
                         <td><%=mascota.nombre%></td>
                         <td><%=mascota.descripcion%></td>
-                        <td>@mdo</td>
+                        <td><a href="mascotas/<%=mascota.id%>" class="btn btn-warning btn-sm">EDITAR</a></td>
                       </tr>
                 <% }) %>
                 <% } %>
             </tbody>
-           
           </table>
     </div>
 <%- include("template/footer")%>

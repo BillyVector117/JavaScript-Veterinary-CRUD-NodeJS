@@ -1,13 +1,21 @@
 const express = require('express') // Libreria para configurar servidor
+const bodyParser = require('body-parser') // Libreria para leer el body 
 const app = express() // Variable para usar el modulo de express
-require('dotenv').config() // Libreria para cargar variables de entorno
-const port = process.env.PORT || 3000; // Sera dinamico
 
+// Configuración de bodyParser: parse application/x-www-form-urlencoded
+app.use(bodyParser.urlencoded({ extended: false }))
+ 
+// parse application/json
+app.use(bodyParser.json())
+
+require('dotenv').config() // Libreria para cargar variables de entorno
+
+const port = process.env.PORT || 3000; // Sera dinamico
 // ----------------Conexión a base de datos (MongoDB)----------------
-// Variables de entorno
+// Variables de entorno estan en un archivo .env y Heroku
 const mongoose = require('mongoose'); // Libreria para conexión a db (MongoDB)
 
-
+// Conexión a la db con las variables de entorno
 const uri = `mongodb+srv://${process.env.USER}:${process.env.PASSWORD}@cluster0.lyluq.mongodb.net/${process.env.DBNAME}?retryWrites=true&w=majority`;
 
 mongoose.connect(uri, // URI de la db

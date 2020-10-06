@@ -1,0 +1,15 @@
+<%- include("template/header", { titleWeb: 'Crear una mascota'})%>
+    
+<div class="container">
+    <h1>Crear mascota</h1>
+    <form action="/mascotas" method="POST"> <!-- Ruta donde se va a procesar el form con metodo POST -->
+        <input type="text" placeholder="Nombre de mascota" class="form-control my-2" name="nombre"> <!-- Input nombre, el name se refiere al campo de la db nombre -->
+        <input type="text" placeholder="Descripción de la mascota" class="form-control my-2" name="descripcion"> <!-- Input descripcion, el name se refiere al campo de la db nombre -->
+        <button class="btn btn-success btn-block" type="submit">Agregar</button>
+    </form>
+</div>
+
+
+
+    
+    <%- include("template/footer")%>
