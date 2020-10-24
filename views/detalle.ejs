@@ -1,26 +1,27 @@
 <%- include("template/header", { titleWeb: 'Detalle de mascota'})%>
-    
+    <!-- Vista de detalle de cada mascota/documento, al darle 'EDITAR' a alguna mascota en ruta index, redirige a esta vista -->
 <div class="container">
     <h1>Detalle Mascota</h1>
-    <!-- Si hay un error (El id no matchea con una mascota), ejecuta un error, delo contrario muestra el resultado del server -->
+    <!-- Ejecuta un error si el id no coincide con una mascota, de lo contrario muestra el resultado del server -->
     
     <% if (error) { %> <!-- Error, id no encontrado -->
         <p>
             <%= mensaje %> <!-- Mensaje de error de la ruta ('/id:') y su catch -->
         </p> 
-        <a href="/mascotas" class="btn btn-dark btn-block">Volver a Mascotas</a>
+        <a href="/mascotas" class="btn btn-dark btn-block">Volver a Mascotas</a> <!-- Botón para regresar al listado de mascotas -->
     <% } %>
     <% if (!error) { %> <!-- Si EXISTE un ID (match) pinta el detalle -->
-            <!-- Formulario para ver detalle de mascotas (Input1: nombre mascota, Input2: descripción mascota) -->
-            <form id="formularioEditar" data-id="<%= mascota.id %>">
-                <p>ID: </p>
-                <input type="text" class="form-control my-2" name="id" id="idInput" value="<%= mascota.id %>">
-                <input type="text" class="form-control my-2" name="nombre" id="nombreInput" value="<%= mascota.nombre %> ">
-                <input type="text" class="form-control my-2" name="descripcion" id="descripcionInput" value="<%= mascota.descripcion %> ">
-                <button class="btn btn-warning btn-block" type="submit">Editar</button>
-            </form>
-            <hr>
-            <button class="btn btn-danger btn-sm" type="submit" id="btnEliminar" data-id="<%= mascota.id %>">ELIMINAR</button></td> <!-- Boton Eliminar-->
+
+        <!-- Formulario para ver detalle de mascotas, cada campo tiene un atributo (Input1: nombre mascota, Input2: descripción mascota), es un formulario para que se pueda editar y mandar submit eventualmente-->
+        <form id="formularioEditar" data-id="<%= mascota.id %>"> <!-- Tenga internamente el id de la mascota a la que dimos editar -->
+            <p>ID: </p>
+            <input type="text" class="form-control my-2" name="id" id="idInput" value="<%= mascota.id %>">
+            <input type="text" class="form-control my-2" name="nombre" id="nombreInput" value="<%= mascota.nombre %> ">
+            <input type="text" class="form-control my-2" name="descripcion" id="descripcionInput" value="<%= mascota.descripcion %> ">
+            <button class="btn btn-warning btn-block" type="submit">Guardar Cambios</button>
+        </form>
+        <hr>
+        <button class="btn btn-danger btn-sm" type="submit" id="btnEliminar" data-id="<%= mascota.id %>">ELIMINAR</button></td> <!-- Boton Eliminar-->
     <% } %>
 </div>
 <%- include("template/footer")%>

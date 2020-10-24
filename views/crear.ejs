@@ -1,15 +1,13 @@
 <%- include("template/header", { titleWeb: 'Crear una mascota'})%>
-    
+    <!-- Vista para crear una mascota/documento, al dar click en 'CREAR del index, dirigira aqui.' -->
 <div class="container">
     <h1>Crear mascota</h1>
-    <form action="/mascotas" method="POST"> <!-- Ruta donde se va a procesar el form con metodo POST -->
-        <input type="text" placeholder="Nombre de mascota" class="form-control my-2" name="nombre"> <!-- Input nombre, el name se refiere al campo de la db nombre -->
-        <input type="text" placeholder="Descripción de la mascota" class="form-control my-2" name="descripcion"> <!-- Input descripcion, el name se refiere al campo de la db nombre -->
-        <button class="btn btn-success btn-block" type="submit">Agregar</button>
+    <!-- Formulario crear mascota, POST para enviar los datos que escribamos al dar submit -->
+    <form action="/mascotas" method="POST"> <!-- Ruta donde se va a procesar el form con metodo POST action '/mascotas' por que ahi se enviaran los datos del body del formulario-->
+        <input type="text" placeholder="Nombre de mascota" class="form-control my-2" name="nombre"> <!-- Input nombre, atributo del modelo de la base de datos -->
+        <input type="text" placeholder="Descripción de la mascota" class="form-control my-2" name="descripcion"> <!-- Input descripcion, atributo del modelo de la base de datos -->
+        <button class="btn btn-success btn-block" type="submit">Agregar nueva mascota</button> <!-- Botón crear mascota, al dar submit los datos escritos se dirigen a la ruta ('router/mascotas')-->
     </form>
 </div>
-
-
-
-    
     <%- include("template/footer")%>
+    
