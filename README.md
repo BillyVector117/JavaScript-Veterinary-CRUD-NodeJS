@@ -1,6 +1,6 @@
 # Veterinary #NodeJsProject
 Agrega/actualiza/Elimina mascotas
-![screnshoot-project]https://github.com/BillyVector117/Veterinary/blob/main/veterinaria.png)
+![screnshoot-project](https://github.com/BillyVector117/Veterinary/blob/main/veterinaria.png)
 
 
 .env
