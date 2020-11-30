@@ -1,9 +1,11 @@
 # Veterinary #NodeJsProject
 Agrega/actualiza/Elimina mascotas
+![screnshoot-project]https://github.com/BillyVector117/Veterinary/blob/main/veterinaria.png)
 
 
 .env
 PORT=3000 
-USER= nameUser(MongoDB)
-PASSWORD= *****(MongoDB)
-DBNAME= DbName(mongoDB)
+(MongoDB)
+USER=nameUser
+PASSWORD=*****
+DBNAME=DbName
