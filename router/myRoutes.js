@@ -1,14 +1,16 @@
-const express = require('express'); // Libreria para configurar servidor
-const router = express.Router(); // Acceder a todas las propiedades de Router.
+// This module contains the main routes
+const express = require('express'); // To create a server
+const router = express.Router(); // Access to Router Methods
 
-// Configuración de rutas con 'Router'
-router.get('/', (req, res) => { // Requerir la pagina/ruta raiz, index
-    res.render("index",{Title: 'This is index Page'}) // Respuesta del server, renderizar el archivo index
+//Routes settings for 'Router'
+router.get('/', (req, res) => { // When Url is in Index
+// First param is render() method and stores/server response the invoqued file (search in /views path), then send JSON as second param
+    res.render("index",{Title: 'This is index Page'})
 })
-router.get('/settings', (req, res) => { // Requerir la pagina/ruta settings
-    res.render("settings",{Title: 'This is a settings Page using Ejs'}) // Respuesta del server, renderizar el archivo settings mas mensaje
+router.get('/settings', (req, res) => {
+    res.render("settings",{Title: 'This is a settings Page using EJS'})
 })
-router.get('/contact', (req, res) => { // Requerir la pagina/ruta contact
-    res.render("contact", {Title: 'This is a Contact Page using Ejs'}) // Respuesta del server, renderizar el archivo contact mas mensaje
+router.get('/contact', (req, res) => {
+    res.render("contact", {Title: 'This is a Contact Page using EJS'})
 })
-module.exports = router; // Exportamos este modulo (router)
+module.exports = router;

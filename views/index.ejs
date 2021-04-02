@@ -1,8 +1,9 @@
-<%- include("template/header", { titleWeb: 'Home'})%>
+<%- include("template/header", { titleWeb: 'Home'})%><!-- PARTIALS FILE -->
 
-    <h1>THIS IS INDEX PAGE USING EJS</h1>
-    <h2><%= Title %></h2> <!-- Title es información externa que viene desde el servidor -->
-    <hr>
-    <hr>
-    <hr>
-<%- include("template/footer")%>
+<h1>Index page using EJS (Template Engine)</h1>
+<h2><%= Title %></h2>
+<!-- Title is the Server response (JSON) -->
+<hr />
+<hr />
+<hr />
+<%- include("template/footer")%><!-- PARTIALS FILE -->

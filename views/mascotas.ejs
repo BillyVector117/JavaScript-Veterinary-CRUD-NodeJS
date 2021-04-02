@@ -1,30 +1,45 @@
 <%- include("template/header", { titleWeb: 'Home'})%>
-  <!-- Vista con tabla de las mascotas existentes -->
-    <div class="container"> <!-- Contenedor de la estructura -->
-      <h1>CRUD MongoDB</h1>
-      <a class="btn btn-success btn-block my-4" href="mascotas/crear"> Crear nueva mascota</a><!-- Botón que dirigé a la ruta crear mascotas *plantilla 'Crear'-->
-        <table class="table"> <!-- Creamos tabla con las cabeceras de los datos-->
-            <thead>
-              <tr> <!-- Cabecera de la tabla -->
-                <th scope="col">#</th> <!-- ID  -->
-                <th scope="col">Nombre</th>
-                <th scope="col">Descripción</th>
-                <th scope="col">Acción</th> <!-- Aqui se colocaran botones -->
-              </tr>
-            </thead>
-            <tbody> <!-- Cuerpo de la tabla -->
-            <!-- Leer todo el listado de mascotas / mas repetición de tr / Si existe el array en la db realiza el ciclo -->
-            <% if (arrayMascotas.length > 0) { %> <!-- arrayMascotas es el arreglo de datos que mongoDB entrega, en la ruta: 'router/mascotas', si tiene mas de 0 datos, comienza la condición -->
-                <% arrayMascotas.forEach(mascota => { %> <!-- Recorre cada elemento, por cada mascota hara un ciclo. -->
-                    <tr> <!-- Este tr sera nuestro ciclo -->
-                        <th scope="row"><%=mascota.id%></th> <!-- Pintar en texto plano el primer elemento (estas propiedades estan en la db(id)) -->
-                        <td><%=mascota.nombre%></td>
-                        <td><%=mascota.descripcion%></td>
-                        <td><a href="mascotas/<%=mascota.id%>" class="btn btn-warning btn-sm">EDITAR</a></td><!--  Botón dinamico para editar una mascota, dirige a la ruta de mascotas/id, es dinamico -->
-                      </tr>
-                <% }) %>
-                <% } %>
-            </tbody>
-        </table>
-      </div>
+<!-- PARTIALS FILES -->
+<!-- This view stores the existing documents/mascotas -->
+<div class="container">
+  <h1>CRUD MongoDB & NodeJS</h1>
+  <a class="btn btn-success btn-block my-4" href="mascotas/crear">
+    Crear nueva mascota</a
+  ><!-- Add new document/mascota-->
+  <!-- Data stored in table -->
+  <table class="table">
+    <thead>
+      <tr>
+        <!-- Header table -->
+        <th scope="col"># ID</th>
+        <!-- ID  -->
+        <th scope="col">Nombre</th>
+        <th scope="col">Descripción</th>
+        <th scope="col">Acción</th>
+        <!-- Bottons -->
+      </tr>
+    </thead>
+    <tbody>
+      <!-- Body table -->
+      <!-- Read data received by Server response (arrayMascotas) at 'mascotas.jg' -->
+      <% if (arrayMascotas.length > 0) { %>
+      <!-- Iterate 'arrayMascotas' array -->
+      <% arrayMascotas.forEach(mascota => { %>
+      <!-- This is the cycled structure -->
+      <tr>
+        <th scope="row"><%=mascota.id%></th>
+        <td><%=mascota.nombre%></td>
+        <td><%=mascota.descripcion%></td>
+        <td>
+          <!--  Dinamic Edit button, redirect to mascotas/:id where 'id' depends on the cycle document -->
+          <a href="mascotas/<%=mascota.id%>" class="btn btn-warning btn-sm"
+            >EDITAR
+          </a>
+        </td>
+      </tr>
+      <% }) %> <% }%>
+    </tbody>
+  </table>
+</div>
+<!-- PARTIALS FILES -->
 <%- include("template/footer")%>

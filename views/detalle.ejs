@@ -1,18 +1,18 @@
+<!-- PARTIALS FILE -->
 <%- include("template/header", { titleWeb: 'Detalle de mascota'})%>
-    <!-- Vista de detalle de cada mascota/documento, al darle 'EDITAR' a alguna mascota en ruta index, redirige a esta vista -->
 <div class="container">
-    <h1>Detalle Mascota</h1>
-    <!-- Ejecuta un error si el id no coincide con una mascota, de lo contrario muestra el resultado del server -->
-    
-    <% if (error) { %> <!-- Error, id no encontrado -->
+    <h1>Detalle Pet/Mascota</h1>
+    <!-- Execute error in case no found document/mascota else store data -->
+    <!-- 'error' is true if :id (Url-Params) does not matches in seatching database docs. -->
+    <% if (error) { %>
         <p>
-            <%= mensaje %> <!-- Mensaje de error de la ruta ('/id:') y su catch -->
+            <%= mensaje %>
         </p> 
-        <a href="/mascotas" class="btn btn-dark btn-block">Volver a Mascotas</a> <!-- Botón para regresar al listado de mascotas -->
+        <a href="/mascotas" class="btn btn-dark btn-block">Volver a Pets/Mascotas</a>
     <% } %>
-    <% if (!error) { %> <!-- Si EXISTE un ID (match) pinta el detalle -->
-
-        <!-- Formulario para ver detalle de mascotas, cada campo tiene un atributo (Input1: nombre mascota, Input2: descripción mascota), es un formulario para que se pueda editar y mandar submit eventualmente-->
+    <!-- If no errors (:id Matches with an document/mascota) -->
+    <% if (!error) { %>
+        <!--Form to store document/mascota details, each input has the same attributes from database object/document properties (Input1: nombre mascota, Input2: descripción mascota)-->
         <form id="formularioEditar" data-id="<%= mascota.id %>"> <!-- Tenga internamente el id de la mascota a la que dimos editar -->
             <p>ID: </p>
             <input type="text" class="form-control my-2" name="id" id="idInput" value="<%= mascota.id %>">
@@ -21,50 +21,62 @@
             <button class="btn btn-warning btn-block" type="submit">Guardar Cambios</button>
         </form>
         <hr>
-        <button class="btn btn-danger btn-sm" type="submit" id="btnEliminar" data-id="<%= mascota.id %>">ELIMINAR</button></td> <!-- Boton Eliminar-->
+        <button class="btn btn-danger btn-sm" type="submit" id="btnEliminar" data-id="<%= mascota.id %>">ELIMINAR</button></td>
     <% } %>
 </div>
+<!-- PARTIALS FILE -->
 <%- include("template/footer")%>
 <script>
-    const btnEliminar = document.querySelector('#btnEliminar') // Seleccionamos el botón por id
-    btnEliminar.addEventListener('click', async() => { // Agregar un evento al dar click
-        const id = btnEliminar.dataset.id // Capturamos el id que pasamos por atributo al botón eliminar, (contiene el id de la mascota)
-        // Usamos fetch para capturar el documento json de la url especificada a eliminar
+    // DELETE button is operating in Vanilla JavaScript because DELETE method can not be used in a button
+    // Select and add an event for delete button
+    const btnEliminar = document.querySelector('#btnEliminar')
+    btnEliminar.addEventListener('click', async() => {
+        // Capture data-id attribute from Delete button (contains id's document/mascota)
+        const id = btnEliminar.dataset.id;
+        // Using fetch() to capture document from Url-Params to delete only that document and send data with DELETE method
         try {
-            const data = await fetch(`/mascotas/${id}`, {// Pasamos la url donde se eliminara el documento (id del documento)
-                method: 'delete' // Ejecutar la url con el metodo delete 
+            // Set 'delete method' at /mascotas/:id Url
+            const data = await fetch(`/mascotas/${id}`, {
+                method: 'delete'
             })
-            const res = await data.json() // Obtiene la respuesta en formato json
-            if (res.estado) { // Si el estado de la respuesta es verdadero...
-                window.location.href = '/mascotas' // ...Redirige al usuario a /mascotas (una pagina atras de detalle)
+            // Get data in JSON format(res from fetch()) and server response (estado) from (mascotas.js)
+            const res = await data.json()
+            if (res.estado) {
+                window.location.href = '/mascotas' // Redirect to /mascotas (previos page to 'detalle.ejs') to ensure delete operation
             } else {
-                console.log(error) // Muestra el error si lo hay.
+                console.log(error)
             }
         } catch (error) {
-            console.lg(error) // Si existe un error en la db lo muestra
+            console.log(error)
         }
     })
-    const formularioEditar = document.querySelector('#formularioEditar') // Selecciona el formulario
-    formularioEditar.addEventListener('submit', async(e) => { // Al dar submit en el formulario editar
-        e.preventDefault() // Previene la recarga de página 
-        const nombre = formularioEditar.elements['nombre'].value // Obtener el valor/contenido forma1. del elemento del formulario con id nombre (ya actualizadó)
-        const descripcion = document.querySelector('#descripcionInput').value // Obtener el valor/contenido forma2. del elemento del formulario con id #descripcionInput (ya actualizadó)
-        const id = formularioEditar.dataset.id // Id correspondiente del documento
+
+// UPDATE/PUT button is operating in Vanilla JavaScript because UPDATE/PUT method can not be used in a button
+// Select and add an event for Edit-Form
+    const formularioEditar = document.querySelector('#formularioEditar')
+    formularioEditar.addEventListener('submit', async(event) => {
+        event.preventDefault()
+        // Capture input-values
+        const nombre = formularioEditar.elements['nombre'].value 
+        const descripcion = document.querySelector('#descripcionInput').value
+        // This dataset is the :id from Url-Params, but loaded in the Form as attribute
+        const id = formularioEditar.dataset.id
+         // Using fetch() to capture document from Url-Params to update only that document and send data with PUT method
         try {
-            const data = await fetch(`/mascotas/${id}`, {// Pasamos la url donde se actualizara el documento (id del documento)
-                method: 'put', // Ejecutar la url con el metodo put
-                headers: { // Cabecera, tipo json
+            const data = await fetch(`/mascotas/${id}`, {
+                method: 'put',
+                headers: {
                     'Content-Type': 'application/json'
                 },
-                body: JSON.stringify({nombre: nombre, descripcion: descripcion}) // Pasarle los datos del documento, transformandolos a json
+                // Set document info and transform to JSON format
+                body: JSON.stringify({nombre: nombre, descripcion: descripcion})
             })
-            const res = await data.json() // Obtiene la respuesta en formato json
-            if (res.estado) { // Si el estado de la respuesta es verdadero...
-                window.location.href = '/mascotas' // ...Redirige al usuario a /mascotas (una pagina atras de detalle)
+            const res = await data.json() // get data in JSON format (res from fetch) and estato from (mascotas.js))
+            if (res.estado) { // If estado is true, it means updated success
+                window.location.href = '/mascotas' // Redirect to /mascotas (previos page to 'detalle.ejs') to ensure update operation
             } else {
-                console.log(res) // Muestra el error si lo hay.
+                console.log(error)
             }
-
         } catch (error) {
             console.log(error)
         }

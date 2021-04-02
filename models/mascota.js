@@ -1,15 +1,16 @@
-const mongoose = require('mongoose'); // Requerir modulo de mongoose (Modelar mongoDB)
-const Schema = mongoose.Schema; // Requerir las funciones de Schema para pocer hacer una estructura en la db
+// This module creates a Squema to define the data type structure (like tables in SQL Database)
+const mongoose = require("mongoose"); // 'mongoose' allows to use mongoDB methods
+const Schema = mongoose.Schema; // Schema methods is required to created a documents structure
 
-// Instanciar un nuevo Schema
-const mascotaSchema = new Schema({ // Esquema/estructura de una mascota
-    // Aqui estan las definiciones de los documentos
-    nombre: String,
-    descripcion: String
-})
+// Instantiate a new schema (Structure/Schema for new Pet)
+const mascotaSchema = new Schema({
+  // Document properties and types
+  nombre: String,
+  descripcion: String,
+});
 
-//Crear modelo
-const Mascota = mongoose.model('Mascota', mascotaSchema); // guardar el Modelo como Mascota 
+// Make model and save as 'Mascota' using 'mascotaSchema' as Schema
+const Mascota = mongoose.model("Mascota", mascotaSchema);
 
-//Exportamos el modelo
+// Model export
 module.exports = Mascota;
